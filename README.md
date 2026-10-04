@@ -1,6 +1,7 @@
 # python-app
 
-A simple Flask application.
+A responsive HarshalTechOps landing page built with Flask, semantic HTML, and
+custom CSS. The interface has no JavaScript or frontend build step.
 
 ## Run locally
 
@@ -23,13 +24,20 @@ A simple Flask application.
    py -m unittest discover -s tests
    ```
 
-4. Start the production WSGI server:
+4. Start the app:
 
    ```powershell
-   py serve.py
+   py app.py
    ```
 
-   Open <http://127.0.0.1:8080/>. The server binds to `0.0.0.0` and uses
-   the `PORT` environment variable when provided (default: `8080`), as expected
-   by most deployment platforms. Set the deployment start command to
-   `python serve.py`.
+   The default port is `5000`; set `PORT` to override it. On Windows this uses
+   Flask's development server because Gunicorn does not support Windows. On
+   Linux and other supported systems, the same command starts Gunicorn. Open
+   <http://127.0.0.1:5000/> locally. The equivalent production command is:
+
+   ```sh
+   gunicorn --bind "0.0.0.0:${PORT:-5000}" app:app
+   ```
+
+   Set the deployment start command to `python app.py` or use the explicit
+   Gunicorn command above.
