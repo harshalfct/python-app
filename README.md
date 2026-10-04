@@ -3,7 +3,7 @@
 A responsive HarshalTechOps landing page built with Flask, semantic HTML, and
 custom CSS. The interface has no JavaScript or frontend build step.
 
-## Run locally
+## Setup and test (Windows)
 
 1. Create and activate a virtual environment:
 
@@ -24,20 +24,22 @@ custom CSS. The interface has no JavaScript or frontend build step.
    py -m unittest discover -s tests
    ```
 
-4. Start the app:
+## Run the app
 
-   ```powershell
-   py app.py
-   ```
+On Windows, run the Flask development server:
 
-   The default port is `5000`; set `PORT` to override it. On Windows this uses
-   Flask's development server because Gunicorn does not support Windows. On
-   Linux and other supported systems, the same command starts Gunicorn. Open
-   <http://127.0.0.1:5000/> locally. The equivalent production command is:
+```powershell
+py app.py
+```
 
-   ```sh
-   gunicorn --bind "0.0.0.0:${PORT:-5000}" app:app
-   ```
+Open <http://127.0.0.1:5000/>. The default port is `5000`; set `PORT` to
+override it.
 
-   Set the deployment start command to `python app.py` or use the explicit
-   Gunicorn command above.
+On Linux, `python app.py` starts Gunicorn. You can also start it directly:
+
+```sh
+gunicorn --bind "0.0.0.0:${PORT:-5000}" app:app
+```
+
+Use either command as the production start command. Gunicorn does not support
+Windows, so use `py app.py` there for local development.
