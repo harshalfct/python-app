@@ -1,14 +1,9 @@
 pipeline {
-    agent { label 'linux' }
-
-    options {
-        skipDefaultCheckout(true)
-    }
-
+    agent any
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com'
+                git branch: 'main', url: 'https://github.com/harshalfct/python-app.git'
             }
         }
 
@@ -44,7 +39,7 @@ pipeline {
                     fuser -k "${PORT:-5000}/tcp" 2>/dev/null || true
                     
                     echo "Starting application..."
-                    BUILD_ID=dontKillMe nohup .venv/bin/python app.py > app.log 2>&1 &
+                    JENKINS_NODE_COOKIE=dontKillMe nohup .venv/bin/python app.py > app.log 2>&1 &
                 '''
             }
         }
